@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Home from './pages/home.jsx'
+import Home from './pages/Home.jsx'
 import  Result  from './pages/result'
 import Buycredit from './pages/Buycredit'
 import {Routes,Route} from 'react-router-dom'
