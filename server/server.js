@@ -11,6 +11,8 @@ const port=process.env.PORT||4000;
 const app=express()
 
 
+console.log("Razorpay Key:", process.env.RAZORPAY_KEY_ID);
+console.log("Razorpay Secret:", process.env.RAZORPAY_KEY_SECRET);
 
 app.use(express.json())
 app.use(cors());

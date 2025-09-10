@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 const Buycredit = () => {
   const {user,backendurl,loadcreditdata,token,setShowlogin}=useContext(AppContext);
   const navigate=useNavigate()
+  console.log("Razorpay key =>", import.meta.env.VITE_RAZORPAY_KEY_ID);
   const initpay=async(order)=>{
       const options={
         key:import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -29,7 +30,7 @@ const Buycredit = () => {
               toast.success('credit added')
            }
            }catch(err){
-              toast.err(err.message)
+              toast.error(err.message)
            }
         }
       }

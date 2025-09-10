@@ -2,10 +2,13 @@ import usermodel from "../model/usermodel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import validator from "validator";
-import razorpay from 'razorpay';
+import Razorpay from 'razorpay';
 import transactionmodel from "../model/transactionmodel.js";
 
 
+console.log("Key ID ===>", JSON.stringify(process.env.RAZORPAY_KEY_ID));
+console.log("Key SECRET ===>", JSON.stringify(process.env.RAZORPAY_KEY_SECRET));
+console.log("curenccy ===>", JSON.stringify(process.env.CURRENCY));
 //login user
 const loginuser= async (req, res) => {
   const { email, password } = req.body;
@@ -139,19 +142,14 @@ const usercredits=async(req,res)=>{
   }
 }
 
-const razorpayInstance=new razorpay({
-   key_id:process.env.RAZORPAY_KEY_ID,
-   key_secret:process.env.RAZORPAY_KEY_SECRET,
-
-})
+console.log("Razorpay Key:", process.env.RAZORPAY_KEY_ID);
+console.log("Razorpay Secret:", process.env.RAZORPAY_KEY_SECRET);
 
 //for payment
-
 const paymentrazorpay=async(req,res)=>{
   try{
-    const {userId,planId}=req.body
-    
-    if(!userId||!planId){
+    const {userId,planId}=req.body;
+    if(!userId ||!planId){
       return res.json({
         success:false,
         message:"missing Details"
@@ -194,6 +192,7 @@ const paymentrazorpay=async(req,res)=>{
     }
 
     date=Date.now();
+    const receipt = `${userId}-${plan}-${date}`;
     const transactionData={
       userId,plan,amount,credits,date
     }
@@ -227,12 +226,20 @@ const paymentrazorpay=async(req,res)=>{
     })
   }
 }
+const razorpayInstance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
 //verify payment
 
 const verifyrazorpay=async(req,res)=>{
   try{
     const {razorpay_order_id}=req.body;
+    const razorpayInstance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
     const orderinfo=await razorpayInstance.orders.fetch(razorpay_order_id)
     if(orderinfo.status==='paid'){
       const transactionData=await transactionmodel.findById(orderinfo.receipt)

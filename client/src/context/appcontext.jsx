@@ -27,7 +27,7 @@ const AppContextProvider=(props)=>{
         toast.error(err.message) 
     }
    }
-    const generateImage= async(prompt)=>{
+     const generateImage= async(prompt)=>{
         try{
           const {data}= await axios.post(backendurl+'/api/image/generate-image',
             {prompt},
@@ -59,6 +59,7 @@ const AppContextProvider=(props)=>{
    useEffect(()=>{
       if(token){
         loadcreditdata()
+        
       }
    },[token])
 

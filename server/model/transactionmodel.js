@@ -8,7 +8,6 @@ const transactionSchema = new mongoose.Schema(
       plan: {
         type:String,
         required: true,
-        unique: true,
       },
       amount: {
         type: Number,
