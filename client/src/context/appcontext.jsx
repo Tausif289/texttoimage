@@ -10,7 +10,7 @@ const AppContextProvider=(props)=>{
    const [showlogin,setShowlogin]=useState(false);
    const [token,setToken]=useState(localStorage.getItem('token'));
    const [credit,setCredit]=useState(false)
-   const backendurl='http://localhost:4000'
+   const backendurl='https://texttoimage-zznm.onrender.com'
    const navigate=useNavigate()
    const loadcreditdata=async ()=>{
     try{
