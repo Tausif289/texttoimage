@@ -1,54 +1,110 @@
-Text-to-Image Converter App 🎨🖼️
+# 🎨 Imagify – Text-to-Image Converter
 
-Convert your text prompts into stunning images with AI – powered by a secure, full-stack MERN application!
+> Turn your text prompts into stunning AI-generated images. A secure, full-stack MERN application with credit-based payments.
 
-Live Demo : https://imagify-ftx0.onrender.com/
+🔗 **Live Demo:** [https://imagify-ftx0.onrender.com/](https://imagify-ftx0.onrender.com/)
 
-🚀 Overview
+![MERN](https://img.shields.io/badge/Stack-MERN-green)
+![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB)
+![Tailwind](https://img.shields.io/badge/Styling-Tailwind%20CSS-38BDF8)
+![Node](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB%20Atlas-47A248)
 
-The Text-to-Image Converter App allows users to generate images from text prompts using AI. Designed for farmers, artists, and content creators, the app includes motion features, secure authentication, and payment integration, enabling a complete end-to-end solution for AI-generated imagery.
+---
 
-🧠 Tech Stack
-Frontend: ⚛️ React.js | 🎨 Tailwind CSS | 🔗 Axios | 🖼 Lucide Icons
-Backend: 🟢 Node.js | ⚙️ Express.js | 🤖 AI Image Generation API / Farmer Motion
-Database: 🗄 MongoDB Atlas
-Authentication: 🔐 JWT-based Secure Login & Signup
-Payments: Razorpay Integration
-Deployment: Vercel (Frontend) + Render / Heroku (Backend)
+## 📖 Overview
 
-🏠 Features
-Text-to-Image Generation
-✏️ Input your text prompt
-🎨 Generate high-quality images
-🔄 Motion-enabled images for dynamic effects
+**Imagify** lets users describe an image in plain text and get an AI-generated result in seconds. It is built for designers, artists, content creators and anyone who wants quick visuals. Users sign up securely, spend credits to generate images, and can buy more credits through an integrated payment gateway.
 
-User Authentication
-🔐 JWT-based login & signup
-✏ Edit profile and manage account securely
+---
 
-🚪 Logout functionality
-Payment Integration
-💳 Purchase credits or subscription plans
-🔗 Secure integration with Stripe / Razorpay APIs
-🧾 Transaction history available in dashboard
+## ✨ Features
 
-Farmer Motion / AI Effects
-🌾 Special motion and enhancement features for agricultural imagery
-⚡ AI-powered filters & animations
+- 🖼️ **Text-to-Image Generation** – enter a prompt and generate a high-quality image with one click
+- 🔐 **Secure Authentication** – JWT-based signup, login and protected routes
+- 💳 **Credit System** – each generation consumes credits; new users get free starter credits
+- 💰 **Payment Integration** – buy credit packs via Razorpay
+- 🧾 **Transaction History** – every purchase is stored and tracked in MongoDB
+- ⬇️ **Download Images** – save generated images directly
+- 📱 **Responsive UI** – clean Tailwind CSS interface that works on mobile and desktop
+- 🌐 **Global State** – React Context API for user, credits and auth state
 
+---
 
-📂 Project Structure
-client/                  # React frontend
-server/                  # Node.js + Express backend
- ├─ controllers/         # API logic, image generation & payment
- ├─ models/              # MongoDB models (Users, Transactions, Images)
- ├─ routes/              # API endpoints
- └─ utils/               # Helper functions (JWT, payments, AI calls)
-💻 Getting Started
-1. Clone the repository
-git clone https://github.com/your-username/text-to-image-app.git
-cd text-to-image-app
-2. Install dependencies
+## 🧠 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React.js (Vite), Tailwind CSS, Axios, React Router, React Toastify |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas + Mongoose |
+| Authentication | JSON Web Tokens (JWT), bcrypt |
+| AI | Text-to-image generation API |
+| Payments | Razorpay |
+| Deployment | Render (full stack) / Vercel (frontend, optional) |
+
+---
+
+## 📂 Project Structure
+
+```
+imagify/
+├── client/                     # React frontend (Vite)
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/             # Images, icons
+│   │   ├── components/         # Navbar, Header, Steps, Description,
+│   │   │                       # GenerateButton, Testimonials, Login, Footer
+│   │   ├── context/            # AppContext (global state)
+│   │   ├── pages/              # Home, Result, BuyCredit
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── tailwind.config.js
+│   ├── vite.config.js
+│   └── package.json
+│
+├── server/                     # Node.js + Express backend
+│   ├── config/
+│   │   └── mongodb.js          # Database connection
+│   ├── controller/
+│   │   ├── usercontroller.js   # Register, login, credits, payments
+│   │   └── imagecontroller.js  # Image generation logic
+│   ├── middleware/
+│   │   └── auth.js             # JWT verification
+│   ├── model/
+│   │   ├── usermodel.js
+│   │   └── transactionmodel.js
+│   ├── routes/
+│   │   ├── userroute.js
+│   │   └── imageroute.js
+│   ├── server.js               # App entry point
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js v18+ and npm
+- A [MongoDB Atlas](https://www.mongodb.com/atlas) cluster
+- An API key for your text-to-image provider
+- A [Razorpay](https://razorpay.com/) account (test keys work)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/imagify.git
+cd imagify
+```
+
+### 2. Install dependencies
+
+```bash
 # Frontend
 cd client
 npm install
@@ -56,47 +112,115 @@ npm install
 # Backend
 cd ../server
 npm install
-3. Setup environment variables
+```
 
-Create a .env file in server/:
+### 3. Configure environment variables
 
-MONGO_URI=your_mongodb_atlas_connection_string
+Create `server/.env`:
+
+```env
+PORT=4000
+MONGODB_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_jwt_secret
-AI_API_KEY=your_ai_image_api_key
-PAYMENT_API_KEY=your_stripe_or_razorpay_key
-4. Run the project
-# Start backend
+CLIPDROP_API=your_image_generation_api_key
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+CURRENCY=INR
+```
+
+Create `client/.env`:
+
+```env
+VITE_BACKEND_URL=http://localhost:4000
+VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
+```
+
+> ⚠️ Never commit `.env` files. Make sure both are listed in `.gitignore`.
+
+### 4. Run the project
+
+```bash
+# Terminal 1 – backend
 cd server
+npm run server        # or: npm run dev / node server.js
+
+# Terminal 2 – frontend
+cd client
 npm run dev
+```
 
-# Start frontend
-cd ../client
-npm start
+Open **http://localhost:5173** in your browser.
 
-Open http://localhost:3000
- to access the app.
+---
 
-⚡ Usage
+## 🔌 API Endpoints
 
-Sign up / Log in with a secure account
-Enter your text prompt in the converter
+### User Routes – `/api/user`
 
-Generate your AI image
-Purchase credits/subscription if needed
-Access your dashboard to view, download, or manage your generated images
+| Method | Endpoint | Description | Auth |
+|---|---|---|---|
+| POST | `/register` | Create a new account | ❌ |
+| POST | `/login` | Log in and receive a JWT | ❌ |
+| GET | `/credits` | Get current user credits | ✅ |
+| POST | `/pay-razor` | Create a Razorpay order | ✅ |
+| POST | `/verify-razor` | Verify payment and add credits | ✅ |
 
-📈 Deployment
-Frontend: Deploy on Vercel
-Backend: Deploy on Render, Heroku, or any Node.js hosting
+### Image Routes – `/api/image`
 
-Set environment variables in production for AI API, MongoDB, JWT secret, and payment API
+| Method | Endpoint | Description | Auth |
+|---|---|---|---|
+| POST | `/generate-image` | Generate an image from a prompt | ✅ |
 
-✨ Contribution
+> Adjust the paths above if your route names differ.
 
-Contributions are welcome! You can help with:
+---
 
-Adding new AI filters and motion features
+## ⚡ How It Works
 
-Improving payment & subscription flows
+1. **Sign up / Log in** – receive a JWT stored on the client.
+2. **Enter a prompt** – the client sends it to the backend with the token.
+3. **Credit check** – the server verifies the user has enough credits.
+4. **Generate** – the server calls the AI API and returns the image.
+5. **Deduct credit** – balance is updated and shown in the navbar.
+6. **Buy more** – pay via Razorpay; the transaction is recorded and credits are added after verification.
 
-Enhancing frontend UI/UX
+---
+
+## ☁️ Deployment
+
+- **Backend:** deploy `server/` on Render (or any Node host). Add all server environment variables in the dashboard.
+- **Frontend:** deploy `client/` on Vercel or Render Static Site. Set `VITE_BACKEND_URL` to your deployed backend URL.
+- Enable CORS on the backend for your frontend domain.
+
+---
+
+## 🛣️ Roadmap
+
+- [ ] Image history / gallery per user
+- [ ] Multiple styles and aspect ratios
+- [ ] Stripe and UPI payment options
+- [ ] Rate limiting and prompt moderation
+- [ ] Dark mode
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "Add your feature"`
+4. Push and open a Pull Request
+
+Ideas to help with: new image styles, improved payment flows, better UI/UX, tests.
+
+---
+
+## 📬 Contact
+
+Built by **Your Name**
+- GitHub: [@your-username](https://github.com/your-username)
+- LinkedIn: [your-linkedin](https://linkedin.com/in/your-linkedin)
+
+⭐ If you like this project, give it a star!
