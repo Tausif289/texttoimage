@@ -220,7 +220,7 @@ Ideas to help with: new image styles, improved payment flows, better UI/UX, test
 ## 📬 Contact
 
 Built by **Tausif*
-- GitHub: [@your-username](https://github.com/Tausif289/texttoimage)
-- LinkedIn: [your-linkedin](https://www.linkedin.com/in/tausif-ansar-292a6b308/?isSelfProfile=true)
+- GitHub: [@Tausif289](https://github.com/Tausif289/texttoimage)
+- LinkedIn: [linkdin](https://www.linkedin.com/in/tausif-ansar-292a6b308/?isSelfProfile=true)
 
 ⭐ If you like this project, give it a star!
